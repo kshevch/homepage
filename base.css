@@ -551,7 +551,8 @@ article {
   border-radius: 0.28571429rem;
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
-  display: block;
+  display: flex;
+  align-items: center;
   float: left;
   font-size: 0.78571429rem;
   font-weight: 600;
@@ -567,6 +568,12 @@ article {
 }
 .labels > .label:not(:last-child) {
   margin-right: 0.5em;
+}
+.labels > li::before {
+  display: none;
+}
+.labels > .label > a {
+  margin-left: 6px;
 }
 
 /* Job */
