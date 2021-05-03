@@ -207,10 +207,6 @@ code {
   background: linear-gradient(to bottom, var(--background-color), transparent);
 }
 
-.parallax > h1, > h2, > h3 {
-  position: absolute;
-}
-
 .parallax > #p_title {
   white-space: nowrap;
   font-size: 5.5vw;
