@@ -1,9 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans");
+
+:root {
+  --surface-color: #1f1b24;
+  --background-color: #49014e;
+  --font-color: rgba(255, 255, 255, 0.8);
+}
+
 ::-moz-selection {
-  background: yellow;
+  background: darkred;
 }
+
 ::selection {
-  background: yellow;
+  background: darkred;
 }
+
 *,
 *::before,
 *::after {
@@ -12,27 +22,32 @@
 html {
   font-size: 14px;
   -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 html,
 body {
   margin: 0;
   line-height: 1.4285em;
-  color: rgba(0, 0, 0, 0.87);
-}
-body {
+  color: var(--font-color);
+
   font-family:
-   apple-system,
-   BlinkMacSystemFont,
-   "Segoe UI",
-   Roboto,
-   Oxygen-Sans,
-   Ubuntu,
-   Cantarell,
-   "Helvetica Neue",
-   sans-serif;
+          "Noto+Sans",
+          apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen-Sans,
+          Ubuntu,
+          Cantarell,
+          "Helvetica Neue",
+          sans-serif;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 h1,
 h2,
 h3,
@@ -87,9 +102,6 @@ h6 {
   text-transform: uppercase;
   margin: 0 0 1em 0;
 }
-section {
-  padding: 1em 0;
-}
 p {
   margin: 0 0 1em;
   line-height: 1.4285em;
@@ -120,7 +132,7 @@ li {
 }
 ul > li::before {
   content: "●";
-  font-family: "Arial", sans-serif;
+  font-family: "Noto+Sans", sans-serif;
   float: left;
   width: 1.5em;
   margin-left: -1.5em;
@@ -166,6 +178,67 @@ code {
   font-size: 95%;
 }
 
+/* Parallax */
+.parallax {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding-bottom: 35%;
+}
+
+.parallax::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  z-index: 150;
+  width: 100%;
+  height: 25%;
+  background: linear-gradient(to top, var(--background-color), transparent);
+}
+
+.parallax::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  z-index: 150;
+  width: 100%;
+  height: 15%;
+  background: linear-gradient(to bottom, var(--background-color), transparent);
+}
+
+.parallax > h1, > h2, > h3 {
+  position: absolute;
+}
+
+.parallax > #p_title {
+  white-space: nowrap;
+  font-size: 5.5vw;
+  position: absolute;
+  z-index: 1;
+  left: 25%;
+  top: 25%;
+}
+
+.parallax > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.parallax > #p_background {
+  position: absolute;
+  z-index: -100;
+}
+
+.parallax > #p_foreground {
+  z-index: 100;
+  position: absolute;
+}
+
 /* Prevent `sub` and `sup` elements from affecting the line height in all browsers */
 sub,
 sup {
@@ -207,7 +280,6 @@ button {
 button,
 [type="button"] {
   -webkit-appearance: button;
-  appearance: button;
 }
 
 /* Remove the inner border and padding in Firefox	*/
@@ -235,7 +307,9 @@ button:-moz-focusring,
 }
 
 /* Article */
+
 article {
+  position: relative;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -266,8 +340,8 @@ article {
 .page {
   position: relative;
   padding: 3em;
-  background: white;
-  box-shadow: 0 10px 100px 0 rgba(34, 36, 38, 0.1);
+  background: var(--surface-color);
+  box-shadow: 0 10px 100px 0 rgba(133, 36, 34, 0.3);
   transition: box-shadow 0.2s linear;
 }
 .page[style^="border-color"] {
@@ -335,9 +409,7 @@ article {
   justify-content: inherit;
   align-items: stretch;
   width: 100% !important;
-  padding: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
 }
 
 /* Columns */
@@ -547,7 +619,7 @@ article {
 
 /* Labels */
 .labels > .label {
-  background-color: #e8e8e8;
+  background-color: #010c3d;
   border-radius: 0.28571429rem;
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
@@ -563,7 +635,7 @@ article {
   -webkit-transition: background 0.1s ease;
 }
 .labels > .label:hover {
-  background-color: #e0e0e0;
+  background-color: #542ABB;
   color: rgba(0, 0, 0, 0.8);
 }
 .labels > .label:not(:last-child) {
@@ -574,6 +646,10 @@ article {
 }
 .labels > .label > a {
   margin-left: 6px;
+  color: var(--font-color);
+}
+.labels > .label > svg {
+  fill: red;
 }
 
 /* Job */
@@ -655,7 +731,7 @@ article {
 details {
   display: block;
 }
-details > summary::-webkit-details-marker {
+details > summary::marker {
   margin-left: 0.25em;
   margin-right: 0.25em;
 }
@@ -799,7 +875,7 @@ li.bordered > ul > details > div {
 .tags.bulleted .tag:not(:last-child)::after {
   content: "●";
   display: inline-block;
-  font-family: "Arial", sans-serif;
+  font-family: "Noto+Sans", sans-serif;
   font-size: 1rem;
   margin: 0 0.25em 0 0.25em;
 }
@@ -920,7 +996,7 @@ dialog {
   position: absolute;
   top: 0;
   left: 0;
-  background: white;
+  background: var(--surface-color);
 }
 dialog .photos {
   height: 100%;
@@ -965,7 +1041,7 @@ dialog:target ~ * {
   top: 50%;
   left: 0;
   margin-top: -1px;
-  background: white;
+  background: var(--surface-color);
   height: 1px;
 }
 .close::before {
@@ -996,7 +1072,7 @@ dialog:target ~ * {
 header {
   position: fixed;
   z-index: 1;
-  background: white;
+  background: var(--surface-color);
   top: 0;
   left: 0;
   height: 2em;
@@ -1008,8 +1084,9 @@ header + main {
 main {
   overflow: auto;
   z-index: 2;
-  background: white;
   position: relative;
+  background: var(--background-color);
+  background: linear-gradient(to bottom, var(--background-color) 30%, rgba(113,7,152,1) 50%, rgba(58,72,217,1) 100%);
 }
 main:nth-last-child(3) {
   margin-bottom: 50vh;
@@ -1020,7 +1097,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: whitesmoke;
+  background: darkturquoise;
   display: flex;
   align-items: center;
   justify-content: center;
